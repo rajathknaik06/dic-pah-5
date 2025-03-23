@@ -1,0 +1,49 @@
+""" Lucas is working on a project where he needs to analyze movie ratings by genre. He has a dataset where each movie's genre and rating are recorded. To make sense of the data, Lucas wants to calculate the average rating for each genre. He needs a program to process this data, compute the average ratings, and print them in ascending order of genre numbers.
+
+
+
+Help Lucas by writing a program that performs this analysis and provides the average ratings in the required format.
+
+Input format :
+The first line of input consists of an integer n, representing the number of entries in the dataset.
+
+The next 2n lines contain the data:
+
+Every odd line contains an integer representing the genre of a movie.
+Every even line contains an integer representing the rating of that movie.
+Output format :
+The output should be a dictionary where the keys are genre numbers and the values are average ratings, formatted to two decimal places.
+
+"""
+
+# Read the number of entries
+n = int(input())
+
+# Initialize dictionaries to hold the genre ratings and count of movies per genre
+genre_ratings = {}
+genre_counts = {}
+
+# Read the input data
+for _ in range(n):
+    genre = int(input())
+    rating = int(input())
+    
+    # Update the total rating and count for each genre
+    if genre in genre_ratings:
+        genre_ratings[genre] += rating
+        genre_counts[genre] += 1
+    else:
+        genre_ratings[genre] = rating
+        genre_counts[genre] = 1
+
+# Compute the average ratings for each genre
+average_ratings = {}
+for genre in genre_ratings:
+    average = genre_ratings[genre] / genre_counts[genre]
+    average_ratings[genre] = round(average, 2)
+
+# Create a formatted dictionary where values are formatted to two decimal places
+formatted_average_ratings = {genre: f"{rating:.2f}" for genre, rating in sorted(average_ratings.items())}
+
+# Print the formatted dictionary
+print(formatted_average_ratings)
